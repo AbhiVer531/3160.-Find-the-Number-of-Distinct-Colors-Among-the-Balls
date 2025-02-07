@@ -1,0 +1,15 @@
+class Solution:
+    def queryResults(self, limit: int, queries: List[List[int]]) -> List[int]:
+        ballMap = {}  
+        colorCount = {} 
+        ans = []
+        for ball, color in queries:
+            if ball in ballMap:
+                prevColor = ballMap[ball]
+                colorCount[prevColor] -= 1
+                if colorCount[prevColor] == 0:
+                    del colorCount[prevColor]  
+            ballMap[ball] = color
+            colorCount[color] = colorCount.get(color, 0) + 1
+            ans.append(len(colorCount))
+        return ans
